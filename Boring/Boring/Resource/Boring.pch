@@ -1,0 +1,21 @@
+//
+//  Boring.pch
+//  Boring
+//
+//  Created by Mac on 2018/1/19.
+//  Copyright © 2018年 RUIPENG. All rights reserved.
+//
+
+#ifndef Boring_pch
+#define Boring_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#import <UIColor_HexRGB/UIColor+HexRGB.h>
+#import <MJExtension/MJExtension.h>
+#import "KSConstant.h"
+#import "Api.h"
+#import <Toast/Toast.h>
+
+#endif /* Boring_pch */
