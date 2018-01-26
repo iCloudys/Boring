@@ -18,7 +18,8 @@
 
 @interface KSIndexController ()<
 UITableViewDelegate,
-UITableViewDataSource>
+UITableViewDataSource,
+UITableViewDataSourcePrefetching>
 
 @property (nonatomic, strong) UITableView* tableView;
 
@@ -41,6 +42,8 @@ UITableViewDataSource>
 - (void)loadData{
     if (!self.dataSource) { self.dataSource = [NSMutableArray array]; }
     
+    if (_page == 0) { _page = 1;}
+    
     Weak(self);
     [[KSTextManager manager] fetchTextWithCategory:self.category
                                               page:_page
@@ -59,6 +62,10 @@ UITableViewDataSource>
 ///MARK: -UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return self.dataSource.count;
+}
+
+- (void)tableView:(UITableView *)tableView prefetchRowsAtIndexPaths:(NSArray<NSIndexPath *> *)indexPaths{
+//    NSLog(@"%@",indexPaths);
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -91,7 +98,6 @@ UITableViewDataSource>
         
         return cell;
     }
-   
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -112,6 +118,10 @@ UITableViewDataSource>
         _tableView.delegate = self;
         _tableView.dataSource = self;
         
+        if (@available(iOS 10,*)) {
+            _tableView.prefetchDataSource = self;
+        }
+        
         _tableView.separatorInset = UIEdgeInsetsZero;
         _tableView.layoutMargins = UIEdgeInsetsZero;
         
@@ -119,6 +129,10 @@ UITableViewDataSource>
         
         _tableView.tableFooterView = [UIView new];
 
+        _tableView.estimatedRowHeight = 0;
+        _tableView.estimatedSectionFooterHeight = 0;
+        _tableView.estimatedSectionHeaderHeight = 0;
+        
         [_tableView registerClass:[KSTableShortCell class]
            forCellReuseIdentifier:KSTableShortCellID];
         [_tableView registerClass:[KSTableLongCell class]

@@ -50,9 +50,42 @@ static Api* _api;
 
                                                                 complete(responseObject);
                                                             } failure:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nullable response, NSError * _Nonnull error) {
-
+                                                                complete(nil);
                                                             }];
 }
+
++ (void)registe:(NSString *)account
+       password:(NSString *)password
+     repassword:(NSString *)repassword
+       complate:(void (^)(BOOL))complate{
+    
+    if (account.length == 0) {
+        [self showMsg:@"账号不能为空"];
+        complate(NO);
+        return;
+    }
+    if (password.length == 0) {
+        [self showMsg:@"密码不能为空"];
+        complate(NO);
+        return;
+    }
+    if (![password isEqualToString:repassword]) {
+        [self showMsg:@"两次密码不一致"];
+        complate(NO);
+        return;
+    }
+    
+    Weak(self);
+    [self POST:@"https://www.wuliaokankan.cn/doregister"
+     parameter:@{@"account":account,@"password":password,@"repassword":repassword}
+       success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject){
+           [weak_self showMsg:@"注册成功"];
+           complate(YES);
+       } failure:^(NSURLSessionDataTask *task, NSError *error) {
+           complate(NO);
+       }];
+}
+
 
 + (void)login:(NSString *)account
      password:(NSString *)password
@@ -128,6 +161,31 @@ static Api* _api;
     
 }
 
++ (void)getTextDetail:(KSText *)text
+             complate:(void (^)(BOOL, NSString *))complate{
+    
+    NSString* url = [NSString stringWithFormat:@"https://www.wuliaokankan.cn/short_detail/%@.html",text.id];
+    if (text.resType == KSTextResLongType) {
+        url = [NSString stringWithFormat:@"https://www.wuliaokankan.cn/long_detail/%@.html",text.id];
+    }
+    
+    AFHTTPSessionManager* manager = [AFHTTPSessionManager manager];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
+    [manager POST:url
+       parameters:nil
+         progress:NULL
+          success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+              
+              NSString* str = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+              
+              complate(YES,str);
+              
+          } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+              complate(NO,nil);
+          }];
+}
+
 + (void)likeText:(KSText *)text
         complate:(void (^)(BOOL))complate{
     
@@ -164,6 +222,32 @@ static Api* _api;
     [self POST:url
      parameter:@{}
        success:^(NSURLSessionDataTask *task, id responseObject) {
+           complate ? complate(YES) : nil;
+       } failure:^(NSURLSessionDataTask *task, NSError *error) {
+           complate ? complate(NO) : nil;
+       }];
+}
+
++ (void)submitFeedbackEmail:(NSString*)email
+                    content:(NSString*)content
+                   complate:(void(^)(BOOL success))complate{
+    
+    if (content.length == 0) {
+        [self showMsg:@"请输入意见"];
+        complate ? complate(NO) : nil;
+        return;
+    }
+    
+    if (content.length > 140) {
+        content = [content substringToIndex:140];
+    }
+    
+    NSString* url = @"https://www.wuliaokankan.cn/feedback";
+    
+    [self POST:url
+     parameter:@{@"email":email,@"content":content}
+       success:^(NSURLSessionDataTask *task, id responseObject) {
+           [self showMsg:@"反馈成功"];
            complate ? complate(YES) : nil;
        } failure:^(NSURLSessionDataTask *task, NSError *error) {
            complate ? complate(NO) : nil;

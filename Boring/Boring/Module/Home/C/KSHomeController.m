@@ -11,12 +11,16 @@
 #import "KSCategory.h"
 #import "KSUser.h"
 #import "KSLoginController.h"
-#import <SDWebImage/UIImageView+WebCache.h>
+#import "KSMineController.h"
+
+#import <SDWebImage/UIButton+WebCache.h>
 
 @interface KSHomeController ()<
 WMPageControllerDelegate,
 WMPageControllerDataSource
 >
+
+@property (nonatomic, strong) UIButton* headerView;
 
 @property (nonatomic, strong) UIView* separator;
 
@@ -52,20 +56,18 @@ WMPageControllerDataSource
 
     self.menuView.backgroundColor = menuViewBackgroundColor;
 
-    UIImageView* header = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"demo"]];
-    header.frame = CGRectMake(0, 0, 30, 30);
-    header.layer.cornerRadius = CGRectGetWidth(header.bounds) / 2;
-    header.layer.masksToBounds = YES;
-    UITapGestureRecognizer* left = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(leftButtonAction:)];
-    [header addGestureRecognizer:left];
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:header];
-    
+    self.headerView = [UIButton buttonWithType:UIButtonTypeCustom];
+    [self.headerView setImage:[UIImage imageNamed:@"demo"] forState:UIControlStateNormal];
+    self.headerView.layer.masksToBounds = YES;
+    [self.headerView addTarget:self action:@selector(leftButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.headerView];
+    /*
     UIImageView* search = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"search"]];
     search.frame = CGRectMake(0, 0, 25, 25);
     UITapGestureRecognizer* right = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(rightButtonAction:)];
     [search addGestureRecognizer:right];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:search];
-    
+    */
     self.separator = [[UIView alloc] init];
     self.separator.backgroundColor = SeparatorColor;
     [self.view addSubview:self.separator];
@@ -77,18 +79,28 @@ WMPageControllerDataSource
                                       CGRectGetHeight(self.menuView.bounds),
                                       CGRectGetWidth(self.view.bounds),
                                       SeparatorHeight);
+
+    self.headerView.frame = CGRectMake(0, 0, 30, 30);
+    self.headerView.layer.cornerRadius = CGRectGetWidth(self.headerView.bounds) / 2;
+
+}
+
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    if ([KSUser shared].header.length > 0) {
+        [self.headerView sd_setImageWithURL:[NSURL URLWithString:[KSUser shared].header] forState:UIControlStateNormal];
+    }
 }
 
 ///MARK:- BarButtonItemAction
-- (void)leftButtonAction:(UITapGestureRecognizer*)tap{
+- (void)leftButtonAction:(UIButton*)tap{
     
     if ([KSUser isLogin]) {
         
+        [KSMineController show];
+        
     }else{
-        [KSLoginController showComplete:^{
-            UIImageView* leftView = (UIImageView*)tap.view;
-            [leftView sd_setImageWithURL:[NSURL URLWithString:[KSUser shared].header]];
-        }];
+        [KSLoginController show];
     }
 }
 

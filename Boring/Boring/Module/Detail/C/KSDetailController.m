@@ -8,73 +8,122 @@
 
 #import "KSDetailController.h"
 #import "KSText.h"
-#import <AFNetworking/AFNetworking.h>
-#import <WebKit/WebKit.h>
+#import <SafariServices/SafariServices.h>
 
 @interface KSDetailController ()<
-WKNavigationDelegate>
+UITextViewDelegate>
 
-@property (nonatomic, strong) WKWebView* webView;
+@property (nonatomic, strong) UITextView* textView;
 
-@property (nonatomic, copy) NSString* url;
 @end
 
 @implementation KSDetailController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
-    self.webView = [[WKWebView alloc] init];
-    self.webView.navigationDelegate = self;
-    [self.view addSubview:self.webView];
     
-    self.url = [NSString stringWithFormat:@"https://www.wuliaokankan.cn/short_detail/%@.html",self.text.id];
-    if (self.text.resType == KSTextResLongType) {
-        self.url = [NSString stringWithFormat:@"https://www.wuliaokankan.cn/long_detail/%@.html",self.text.id];
-    }
-
-    [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.url]]];
+    self.textView = [[UITextView alloc] init];
+    self.textView.editable = NO;
+    self.textView.delegate = self;
+    [self.view addSubview:self.textView];
+    
+    [self loadData];
 }
 
 - (void)viewDidLayoutSubviews{
     [super viewDidLayoutSubviews];
-    self.webView.frame =self.view.bounds;
+    self.textView.frame = self.view.bounds;
 }
 
-- (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation{
-
-    NSMutableArray<NSString*>* jses = @[
-                                        @"document.getElementById('header').style.display='none'",
-                                        @"document.getElementById('footer').style.display='none'",
-                                        @"document.getElementsByClassName('adsense')[0].style.display='none'",
-                                        @"document.getElementsByClassName('recommend')[0].style.display='none'",
-                                        @"document.getElementById('pagelet-ncomment').style.display='none'",
-                                        ].mutableCopy;
+///MARK:- UITextViewDelegate
+- (BOOL)textView:(UITextView *)textView shouldInteractWithURL:(NSURL *)URL inRange:(NSRange)characterRange{
     
-    if (self.text.resType == KSTextResLongType) {
-        [jses addObject:@"document.getElementsByClassName('brother')[0].style.display='none'"];
-        [jses addObject:@"document.getElementsByClassName('collect-share')[0].style.display='none'"];
-    }else{
-        [jses addObject:@"document.getElementById('pagelet-snsbox').style.display='none'"];
-        [jses addObject:@"document.getElementsByClassName('right-btn clip')[0].style.display='none'"];
-        [jses addObject:@"document.getElementsByClassName('left-btn clip')[0].style.display='none'"];
-    }
+//    SFSafariViewController* safari = [[SFSafariViewController alloc] initWithURL:URL entersReaderIfAvailable:YES];
     
-    for (NSString* js in jses) {
-        [webView evaluateJavaScript:js
-                  completionHandler:^(id obj, NSError * _Nullable error) {
-                  }];
-    }
+//    [self presentViewController:safari animated:YES completion:NULL];
+    
+    return YES;
 }
 
-- (void)webView:(WKWebView *)webView
-decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction
-decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler{
-    if ([navigationAction.request.URL.absoluteString isEqualToString:self.url]) {
-        decisionHandler(WKNavigationActionPolicyAllow);
+- (void)loadData{
+    
+    Weak(self);
+    [Api getTextDetail:self.text
+              complate:^(BOOL success, NSString *html) {
+                  
+                  if (success) {
+                      if (weak_self.text.resType == KSTextResShortType) {
+                          [weak_self loadShortHtml:html];
+                      }else{
+                          [weak_self loadLongHtml:html];
+                      }
+                  }
+              }];
+}
+
+- (void)loadLongHtml:(NSString*)html{
+    
+    NSString* pattern = @"(?<=<div class=\"article-content\">)([\\w\\W]+)(?=<div class=\"y-box article-actions\">)";
+    
+    NSRegularExpression* regularExpression = [NSRegularExpression regularExpressionWithPattern:pattern options:1 error:nil];
+    
+    NSTextCheckingResult* checkingResult = [regularExpression firstMatchInString:html options:0 range:NSMakeRange(0, html.length)];
+    
+    NSString* subStr = [html substringWithRange:checkingResult.range];
+    
+    NSString* header = [NSString stringWithFormat:@"<html><head><style>img{max-width:%fpx !important;} p{font-size:15px;}</style></head><body>",CGRectGetWidth(self.textView.frame)];
+    
+    NSString* footer = @"</body></html>";
+    
+    if (subStr.length != 0) {
+        subStr = [NSString stringWithFormat:@"%@%@%@",header,subStr,footer];
     }else{
-        decisionHandler(WKNavigationActionPolicyCancel);
+        subStr = [NSString stringWithFormat:@"%@<p>文章找不到</p>%@",header,footer];
     }
+    
+    NSMutableDictionary* options = [NSMutableDictionary dictionary];
+    [options setObject:NSHTMLTextDocumentType forKey:NSDocumentTypeDocumentOption];
+    [options setObject:@(NSUTF8StringEncoding) forKey:NSCharacterEncodingDocumentAttribute];
+
+    NSAttributedString* attributeStr = [[NSAttributedString alloc] initWithData:[subStr dataUsingEncoding:NSUTF8StringEncoding]
+                                                                        options:options
+                                                             documentAttributes:nil
+                                                                          error:nil];
+    
+    self.textView.attributedText = attributeStr;
+}
+
+- (void)loadShortHtml:(NSString*)html{
+    
+    NSString* pattern = @"(?<=<div class=\"content-middle\">)([\\s\\S]*?)(?=(</div>))";
+    
+    NSRegularExpression* regularExpression = [NSRegularExpression regularExpressionWithPattern:pattern options:1 error:nil];
+    
+    NSTextCheckingResult* checkingResult = [regularExpression firstMatchInString:html options:0 range:NSMakeRange(0, html.length)];
+    
+    NSString* subStr = [html substringWithRange:checkingResult.range];
+   
+    NSString* header = [NSString stringWithFormat: @"<style>img{max-width:%fpx !important;} p{font-size:15px;}</style>", CGRectGetWidth(self.textView.frame)];
+    
+    NSString* footer = @"</body></html>";
+    
+    if (subStr.length != 0) {
+        subStr = [NSString stringWithFormat:@"%@%@%@",header,subStr,footer];
+    }else{
+        subStr = [NSString stringWithFormat:@"%@<p>文章找不到</p>%@",header,footer];
+    }
+    
+    NSMutableDictionary* options = [NSMutableDictionary dictionary];
+    [options setObject:NSHTMLTextDocumentType forKey:NSDocumentTypeDocumentOption];
+    [options setObject:@(NSUTF8StringEncoding) forKey:NSCharacterEncodingDocumentAttribute];
+    
+    NSAttributedString* attributeStr = [[NSAttributedString alloc] initWithData:[subStr dataUsingEncoding:NSUTF8StringEncoding]
+                                                                        options:options
+                                                             documentAttributes:nil
+                                                                          error:nil];
+    
+    self.textView.attributedText = attributeStr;
+    
 }
 
 @end

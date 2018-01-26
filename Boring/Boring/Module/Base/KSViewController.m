@@ -13,6 +13,10 @@
 @end
 
 @implementation KSViewController
+- (void)viewDidLoad{
+    [super viewDidLoad];
+    self.view.backgroundColor = [UIColor whiteColor];
+}
 
 - (void)dealloc{
     NSLog(@"dealloc:%@",self);

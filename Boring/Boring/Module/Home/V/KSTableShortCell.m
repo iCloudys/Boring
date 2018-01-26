@@ -246,14 +246,7 @@
     self.unLikebtn.selected = text.isUnlike;
     self.starBtn.selected = text.isCollect;
     
-    NSMutableParagraphStyle* paragraphStyle = [[NSMutableParagraphStyle alloc] init];
-    paragraphStyle.lineSpacing = TextLineSpacing;
-    
-    NSMutableDictionary* attributes = [NSMutableDictionary dictionary];
-    [attributes setObject:TextFont forKey:NSFontAttributeName];
-    [attributes setObject:paragraphStyle forKey:NSParagraphStyleAttributeName];
-    NSAttributedString* attributeString = [[NSAttributedString alloc] initWithString:text.content attributes:attributes];
-    self.contentLabel.attributedText = attributeString;
+    self.contentLabel.attributedText = text.attributeContent;
     
 }
 

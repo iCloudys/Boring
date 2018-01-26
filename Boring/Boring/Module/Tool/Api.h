@@ -21,9 +21,19 @@
       captcha:(NSString*)captcha
      complate:(void(^)(BOOL success))complate;
 
++ (void)registe:(NSString*)account
+       password:(NSString*)password
+     repassword:(NSString*)repassword
+       complate:(void(^)(BOOL success))complate;
+
+
 + (void)getTextWithCategory:(KSCategory*)category
                        page:(NSUInteger)page
                    complate:(void(^)(NSArray<KSText*>* texts))complate;
+
+
++ (void)getTextDetail:(KSText*)text
+             complate:(void(^)(BOOL success, NSString* html))complate;
 
 
 + (void)likeText:(KSText*)text
@@ -37,4 +47,7 @@
 + (void)collectText:(KSText *)text
            complate:(void(^)(BOOL success))complate;
 
++ (void)submitFeedbackEmail:(NSString*)email
+                    content:(NSString*)content
+                   complate:(void(^)(BOOL success))complate;
 @end

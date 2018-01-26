@@ -1,14 +1,14 @@
 //
-//  KSLoginController.h
+//  KSMineController.h
 //  Boring
 //
-//  Created by Mac on 2018/1/22.
+//  Created by Mac on 2018/1/24.
 //  Copyright © 2018年 RUIPENG. All rights reserved.
 //
 
 #import "KSViewController.h"
 
-@interface KSLoginController : KSViewController
+@interface KSMineController : KSViewController
 
 + (void)show;
 

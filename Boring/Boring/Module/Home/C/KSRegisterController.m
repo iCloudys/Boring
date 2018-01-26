@@ -1,19 +1,15 @@
 //
-//  KSLoginController.m
+//  KSRegisterController.m
 //  Boring
 //
-//  Created by Mac on 2018/1/22.
+//  Created by Mac on 2018/1/26.
 //  Copyright © 2018年 RUIPENG. All rights reserved.
 //
 
-#import "KSLoginController.h"
-#import "KSNavigationController.h"
-#import "KSMineController.h"
 #import "KSRegisterController.h"
 
-@interface KSLoginController ()
 
-@property (nonatomic, copy) dispatch_block_t complete;
+@interface KSRegisterController ()
 
 @property (nonatomic, strong) UIView* userNameBackView;
 @property (nonatomic, strong) UIView* passWordBackView;
@@ -26,34 +22,19 @@
 @property (nonatomic, strong) UIImageView* userNameIcon;
 @property (nonatomic, strong) UIImageView* passWordIcon;
 @property (nonatomic, strong) UIImageView* identifyIcon;
-@property (nonatomic, strong) UIButton* identifyView;
-@property (nonatomic, strong) UIActivityIndicatorView* identifyIndicatorView;
 
-@property (nonatomic, strong) UIButton* loginButton;
 @property (nonatomic, strong) UIButton* registerButton;
 
 @end
 
-@implementation KSLoginController
+@implementation KSRegisterController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     
-    self.navigationItem.title = @"个人账号登录";
-    
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"取消"
-                                                                             style:UIBarButtonItemStylePlain
-                                                                            target:self
-                                                                            action:@selector(cancelLoginAction:)];
-    
-
+    self.navigationItem.title = @"注册";
     [self setupSubviews];
-    
-#if DEBUG
-    self.userNameField.text = @"qqqqqq";
-    self.passWordField.text = @"123456";
-#endif
 }
 
 - (void)viewDidLayoutSubviews{
@@ -110,28 +91,16 @@
                                              icon_size.width,
                                              icon_size.height);
         
-        self.identifyView.frame = CGRectMake(backView_size.width - 122,
-                                             0,
-                                             122,
-                                             backView_size.height);
-        
-        self.identifyIndicatorView.frame = self.identifyView.frame;
-        
         self.identifyField.frame = CGRectMake(CGRectGetMaxX(self.identifyIcon.frame) + textField_leftMargin,
                                               0,
-                                              CGRectGetMinX(self.identifyView.frame) - CGRectGetMaxX(self.identifyIcon.frame) - textField_leftMargin,
+                                              backView_size.width - CGRectGetMaxX(self.identifyIcon.frame) - textField_leftMargin,
                                               backView_size.height);
     }
     {
-        self.loginButton.frame = CGRectMake(layoutMargin.left,
+        self.registerButton.frame = CGRectMake(layoutMargin.left,
                                             CGRectGetMaxY(self.identifyBackView.frame) + backView_space * 2,
                                             backView_size.width,
                                             backView_size.height);
-        
-        self.registerButton.frame = CGRectMake(CGRectGetMaxX(self.loginButton.frame) - 130,
-                                               CGRectGetMaxY(self.loginButton.frame) + 10,
-                                               130,
-                                               20);
     }
 }
 
@@ -175,43 +144,22 @@
         self.identifyBackView.layer.borderWidth = SeparatorHeight;
         [self.view addSubview:self.identifyBackView];
         
-        self.identifyIcon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"identifity"]];
+        self.identifyIcon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"password"]];
         [self.identifyBackView addSubview:self.identifyIcon];
         
         self.identifyField = [[UITextField alloc] init];
-        self.identifyField.placeholder = @"请输入验证码";
+        self.identifyField.placeholder = @"请再次输入密码";
         self.identifyField.textColor = self.userNameField.textColor;
         self.identifyField.font = self.userNameField.font;
-        self.identifyField.autocorrectionType = UITextAutocorrectionTypeNo;
-        self.identifyField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+        self.identifyField.secureTextEntry = YES;
         [self.identifyBackView addSubview:self.identifyField];
-        
-        self.identifyView = [UIButton buttonWithType:UIButtonTypeCustom];
-        self.identifyView.backgroundColor = SeparatorColor;
-        self.identifyView.adjustsImageWhenHighlighted = NO;
-        [self.identifyView setTitle:@"点击获取验证码" forState:UIControlStateNormal];
-        self.identifyView.titleLabel.font = [UIFont systemFontOfSize:12];
-        [self.identifyView addTarget:self action:@selector(getIdentifyAction:) forControlEvents:UIControlEventTouchUpInside];
-        [self.identifyBackView addSubview:self.identifyView];
-        
-        self.identifyIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
-        [self.identifyBackView addSubview:self.identifyIndicatorView];
-        
     }
     {
-        self.loginButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [self.loginButton setTitle:@"登 录" forState:UIControlStateNormal];
-        self.loginButton.titleLabel.font = [UIFont systemFontOfSize:14];
-        self.loginButton.backgroundColor = ThemeColor;
-        [self.loginButton addTarget:self action:@selector(loginAction:) forControlEvents:UIControlEventTouchUpInside];
-        [self.view addSubview:self.loginButton];
-        
         self.registerButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [self.registerButton setTitle:@"没有账号?点此注册" forState:UIControlStateNormal];
-        self.registerButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
-        self.registerButton.titleLabel.font = [UIFont systemFontOfSize:12];
-        [self.registerButton setTitleColor:SeparatorColor forState:UIControlStateNormal];
-        [self.registerButton addTarget:self action:@selector(registerAction:) forControlEvents:UIControlEventTouchUpInside];
+        [self.registerButton setTitle:@"注 册" forState:UIControlStateNormal];
+        self.registerButton.titleLabel.font = [UIFont systemFontOfSize:14];
+        self.registerButton.backgroundColor = ThemeColor;
+        [self.registerButton addTarget:self action:@selector(loginAction:) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:self.registerButton];
     }
 }
@@ -224,68 +172,29 @@
 
 - (void)loginAction:(UIButton*)login{
     [self.view endEditing:YES];
-        
+    
     //登录
     NSString* username = self.userNameField.text;
     NSString* password = self.passWordField.text;
     NSString* identifity = self.identifyField.text;
     
     Weak(self);
-    [Api login:username
-      password:password
-       captcha:identifity
-      complate:^(BOOL success){
-          if (success) {
-              
-              weak_self.complete ? weak_self.complete() : nil;
-
-              [weak_self loginSuccess];
-          }else{
-              [weak_self getIdentifyAction:nil];
-          }
-      }];
-}
-
-- (void)registerAction:(UIButton*)btn{
-    KSRegisterController* regist = [[KSRegisterController alloc] init];
-    [self.navigationController pushViewController:regist animated:YES];
+    [Api registe:username
+        password:password
+      repassword:identifity
+        complate:^(BOOL success) {
+            if (success) {
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    [weak_self.navigationController popViewControllerAnimated:YES];
+                });
+            }
+        }];
+    
 }
 
 - (void)loginSuccess{
-    KSMineController* mine = [[KSMineController alloc] init];
-    [self.navigationController pushViewController:mine animated:YES];
+
 }
 
-- (void)cancelLoginAction:(UIBarButtonItem*)item{
-    [self.view endEditing:YES];
-    
-    [self.navigationController dismissViewControllerAnimated:YES completion:NULL];
-}
-
-- (void)getIdentifyAction:(UIButton*)button{
-    button.userInteractionEnabled = NO;
-    [self.identifyIndicatorView startAnimating];
-    
-    Weak(self);
-    [Api getIdentifyCode:^(UIImage *code) {
-        [weak_self.identifyView setTitle:nil forState:UIControlStateNormal];
-        [weak_self.identifyView setImage:code forState:UIControlStateNormal];
-        weak_self.identifyView.userInteractionEnabled = YES;
-        [weak_self.identifyIndicatorView stopAnimating];
-    }];
-}
-
-
-///MARK:-
-+ (void)show{
-
-    KSLoginController* login = [[KSLoginController alloc] init];
-    
-    KSNavigationController* nav = [[KSNavigationController alloc] initWithRootViewController:login];
-    
-    UIViewController* rootViewController = [UIApplication sharedApplication].delegate.window.rootViewController;
-    
-    [rootViewController presentViewController:nav animated:YES completion:NULL];
-}
 
 @end

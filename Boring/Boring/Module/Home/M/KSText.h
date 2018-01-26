@@ -18,7 +18,10 @@
 @property (nonatomic, copy) NSString* htmlDescription;
 @property (nonatomic, copy) NSString* resId;
 @property (nonatomic, copy) NSString* userId;
+
 @property (nonatomic, copy) NSString* content;
+@property (nonatomic, copy, readonly) NSAttributedString* attributeContent;
+
 @property (nonatomic, copy) NSString* down;
 @property (nonatomic, copy) NSString* resName;
 @property (nonatomic, copy) NSString* htmlTitle;
@@ -32,7 +35,10 @@
 @property (nonatomic, copy) NSString* cp_sum;
 
 @property (nonatomic, copy) NSString* picture;
+
 @property (nonatomic, copy) NSString* title;
+@property (nonatomic, copy, readonly) NSAttributedString* attributeTitle;
+
 @property (nonatomic, copy) NSString* createTime;
 
 @property (nonatomic, assign) KSTextResType resType;
@@ -41,5 +47,6 @@
 @property (nonatomic, assign) BOOL isCollect;
 @property (nonatomic, assign) BOOL isLike;
 @property (nonatomic, assign) BOOL isUnlike;
+
 
 @end

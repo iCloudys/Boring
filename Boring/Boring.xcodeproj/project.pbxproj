@@ -25,6 +25,14 @@
 		042D0C272017168A004474FA /* KSTableShortCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 042D0C252017168A004474FA /* KSTableShortCell.m */; };
 		042D0C2A201716E7004474FA /* KSTableLongCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 042D0C29201716E7004474FA /* KSTableLongCell.m */; };
 		042D0C2F20172F1D004474FA /* KSDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 042D0C2E20172F1D004474FA /* KSDetailController.m */; };
+		042D0C34201837CB004474FA /* KSMineController.m in Sources */ = {isa = PBXBuildFile; fileRef = 042D0C33201837CB004474FA /* KSMineController.m */; };
+		042D0C3820184293004474FA /* KSMineHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 042D0C3720184293004474FA /* KSMineHeaderCell.m */; };
+		042D0C3B201895DA004474FA /* KSMineItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 042D0C3A201895DA004474FA /* KSMineItemCell.m */; };
+		042D0C3F2018976E004474FA /* KSMineItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 042D0C3E2018976E004474FA /* KSMineItem.m */; };
+		04DA9243201ADEF4009DD462 /* KSFeedBackController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DA9242201ADEF4009DD462 /* KSFeedBackController.m */; };
+		04DA9246201ADF28009DD462 /* KSSubmitController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DA9245201ADF28009DD462 /* KSSubmitController.m */; };
+		04DA9249201ADF4F009DD462 /* KSCollectController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DA9248201ADF4F009DD462 /* KSCollectController.m */; };
+		04DA924C201B2328009DD462 /* KSRegisterController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DA924B201B2328009DD462 /* KSRegisterController.m */; };
 		0973B4704BEB06A2C8D2A829 /* Pods_Boring.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5E9683316974CD09053C230 /* Pods_Boring.framework */; };
 /* End PBXBuildFile section */
 
@@ -65,6 +73,22 @@
 		042D0C29201716E7004474FA /* KSTableLongCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KSTableLongCell.m; sourceTree = "<group>"; };
 		042D0C2D20172F1D004474FA /* KSDetailController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KSDetailController.h; sourceTree = "<group>"; };
 		042D0C2E20172F1D004474FA /* KSDetailController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KSDetailController.m; sourceTree = "<group>"; };
+		042D0C32201837CB004474FA /* KSMineController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KSMineController.h; sourceTree = "<group>"; };
+		042D0C33201837CB004474FA /* KSMineController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KSMineController.m; sourceTree = "<group>"; };
+		042D0C3620184293004474FA /* KSMineHeaderCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KSMineHeaderCell.h; sourceTree = "<group>"; };
+		042D0C3720184293004474FA /* KSMineHeaderCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KSMineHeaderCell.m; sourceTree = "<group>"; };
+		042D0C39201895DA004474FA /* KSMineItemCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KSMineItemCell.h; sourceTree = "<group>"; };
+		042D0C3A201895DA004474FA /* KSMineItemCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KSMineItemCell.m; sourceTree = "<group>"; };
+		042D0C3D2018976E004474FA /* KSMineItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KSMineItem.h; sourceTree = "<group>"; };
+		042D0C3E2018976E004474FA /* KSMineItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KSMineItem.m; sourceTree = "<group>"; };
+		04DA9241201ADEF4009DD462 /* KSFeedBackController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KSFeedBackController.h; sourceTree = "<group>"; };
+		04DA9242201ADEF4009DD462 /* KSFeedBackController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KSFeedBackController.m; sourceTree = "<group>"; };
+		04DA9244201ADF28009DD462 /* KSSubmitController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KSSubmitController.h; sourceTree = "<group>"; };
+		04DA9245201ADF28009DD462 /* KSSubmitController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KSSubmitController.m; sourceTree = "<group>"; };
+		04DA9247201ADF4F009DD462 /* KSCollectController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KSCollectController.h; sourceTree = "<group>"; };
+		04DA9248201ADF4F009DD462 /* KSCollectController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KSCollectController.m; sourceTree = "<group>"; };
+		04DA924A201B2328009DD462 /* KSRegisterController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KSRegisterController.h; sourceTree = "<group>"; };
+		04DA924B201B2328009DD462 /* KSRegisterController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KSRegisterController.m; sourceTree = "<group>"; };
 		12B2851F94F847E0910AD50C /* Pods-Boring.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Boring.release.xcconfig"; path = "Pods/Target Support Files/Pods-Boring/Pods-Boring.release.xcconfig"; sourceTree = "<group>"; };
 		A9A42B46BBAE0E5AF31BDE29 /* Pods-Boring.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Boring.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Boring/Pods-Boring.debug.xcconfig"; sourceTree = "<group>"; };
 		F5E9683316974CD09053C230 /* Pods_Boring.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Boring.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -117,6 +141,7 @@
 				0429F4AC20119AFE007C17F5 /* Base */,
 				0429F4A520119A6A007C17F5 /* Home */,
 				042D0C2B20172E94004474FA /* Detail */,
+				042D0C30201837AF004474FA /* Mine */,
 			);
 			path = Module;
 			sourceTree = "<group>";
@@ -173,6 +198,8 @@
 				0429F4AA20119A87007C17F5 /* KSIndexController.m */,
 				042D0C1F2015C6B5004474FA /* KSLoginController.h */,
 				042D0C202015C6B5004474FA /* KSLoginController.m */,
+				04DA924A201B2328009DD462 /* KSRegisterController.h */,
+				04DA924B201B2328009DD462 /* KSRegisterController.m */,
 			);
 			path = C;
 			sourceTree = "<group>";
@@ -228,6 +255,51 @@
 				042D0C2E20172F1D004474FA /* KSDetailController.m */,
 			);
 			path = C;
+			sourceTree = "<group>";
+		};
+		042D0C30201837AF004474FA /* Mine */ = {
+			isa = PBXGroup;
+			children = (
+				042D0C3C20189762004474FA /* M */,
+				042D0C352018427D004474FA /* V */,
+				042D0C31201837C1004474FA /* C */,
+			);
+			path = Mine;
+			sourceTree = "<group>";
+		};
+		042D0C31201837C1004474FA /* C */ = {
+			isa = PBXGroup;
+			children = (
+				042D0C32201837CB004474FA /* KSMineController.h */,
+				042D0C33201837CB004474FA /* KSMineController.m */,
+				04DA9241201ADEF4009DD462 /* KSFeedBackController.h */,
+				04DA9242201ADEF4009DD462 /* KSFeedBackController.m */,
+				04DA9244201ADF28009DD462 /* KSSubmitController.h */,
+				04DA9245201ADF28009DD462 /* KSSubmitController.m */,
+				04DA9247201ADF4F009DD462 /* KSCollectController.h */,
+				04DA9248201ADF4F009DD462 /* KSCollectController.m */,
+			);
+			path = C;
+			sourceTree = "<group>";
+		};
+		042D0C352018427D004474FA /* V */ = {
+			isa = PBXGroup;
+			children = (
+				042D0C3620184293004474FA /* KSMineHeaderCell.h */,
+				042D0C3720184293004474FA /* KSMineHeaderCell.m */,
+				042D0C39201895DA004474FA /* KSMineItemCell.h */,
+				042D0C3A201895DA004474FA /* KSMineItemCell.m */,
+			);
+			path = V;
+			sourceTree = "<group>";
+		};
+		042D0C3C20189762004474FA /* M */ = {
+			isa = PBXGroup;
+			children = (
+				042D0C3D2018976E004474FA /* KSMineItem.h */,
+				042D0C3E2018976E004474FA /* KSMineItem.m */,
+			);
+			path = M;
 			sourceTree = "<group>";
 		};
 		9BFAE498DB637D94532E6314 /* Pods */ = {
@@ -388,18 +460,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				042D0C3F2018976E004474FA /* KSMineItem.m in Sources */,
 				042D0C1E2015C031004474FA /* Api.m in Sources */,
 				0429F4B220119B19007C17F5 /* KSViewController.m in Sources */,
 				042D0C242015F9E8004474FA /* KSUser.m in Sources */,
 				0429F4BA20120082007C17F5 /* KSCategory.m in Sources */,
+				04DA9246201ADF28009DD462 /* KSSubmitController.m in Sources */,
 				0429F4AB20119A87007C17F5 /* KSIndexController.m in Sources */,
 				0429F4C72012C5FD007C17F5 /* KSTextManager.m in Sources */,
 				0429F49C201195DD007C17F5 /* main.m in Sources */,
+				042D0C3B201895DA004474FA /* KSMineItemCell.m in Sources */,
 				042D0C272017168A004474FA /* KSTableShortCell.m in Sources */,
+				042D0C34201837CB004474FA /* KSMineController.m in Sources */,
+				04DA9249201ADF4F009DD462 /* KSCollectController.m in Sources */,
 				0429F4AF20119B10007C17F5 /* KSNavigationController.m in Sources */,
 				0429F4A820119A7B007C17F5 /* KSHomeController.m in Sources */,
+				042D0C3820184293004474FA /* KSMineHeaderCell.m in Sources */,
 				0429F4BF201206CE007C17F5 /* KSText.m in Sources */,
 				042D0C212015C6B5004474FA /* KSLoginController.m in Sources */,
+				04DA924C201B2328009DD462 /* KSRegisterController.m in Sources */,
+				04DA9243201ADEF4009DD462 /* KSFeedBackController.m in Sources */,
 				042D0C2A201716E7004474FA /* KSTableLongCell.m in Sources */,
 				0429F48E201195DD007C17F5 /* AppDelegate.m in Sources */,
 				042D0C2F20172F1D004474FA /* KSDetailController.m in Sources */,
@@ -530,11 +610,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = GB56S2965F;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/Boring/Resource/Boring.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/Boring/Resource/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = lingshuo.Boring;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lingshuo.test;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WARNING_CFLAGS = "-Wno-strict-prototypes";
@@ -547,11 +628,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = GB56S2965F;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/Boring/Resource/Boring.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/Boring/Resource/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = lingshuo.Boring;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lingshuo.test;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WARNING_CFLAGS = "-Wno-strict-prototypes";

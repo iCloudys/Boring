@@ -77,30 +77,7 @@
         self.pictureView.image = nil;
     }
     
-    NSMutableParagraphStyle* paragraphStyle = [[NSMutableParagraphStyle alloc] init];
-    paragraphStyle.lineSpacing = 5;
-    
-    NSMutableAttributedString* attributeString = [[NSMutableAttributedString alloc] init];
-    
-    [attributeString appendAttributedString:[[NSAttributedString alloc]
-                                             initWithString:text.title
-                                             attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:16],
-                                                          NSForegroundColorAttributeName:[UIColor colorWithHex:@"323232"]
-                                                          }
-                                             ]
-     ];
-    
-    [attributeString appendAttributedString:[[NSAttributedString alloc]
-                                             initWithString:[NSString stringWithFormat:@"\n%@阅读",text.pageview]
-                                             attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12],
-                                                          NSForegroundColorAttributeName:[UIColor colorWithHex:@"7d7d7d"],
-                                                          }
-                                             ]
-     ];
-    
-    [attributeString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, attributeString.string.length)];
-    
-    self.contentLabel.attributedText = attributeString;
+    self.contentLabel.attributedText = text.attributeTitle;
     
 }
 
