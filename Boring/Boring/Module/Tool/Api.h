@@ -47,6 +47,9 @@
 + (void)collectText:(KSText *)text
            complate:(void(^)(BOOL success))complate;
 
++ (void)fetchCollectUser:(NSString*)userId
+                complate:(void(^)(BOOL success, NSArray<KSText*>* texts))complate;
+
 + (void)submitFeedbackEmail:(NSString*)email
                     content:(NSString*)content
                    complate:(void(^)(BOOL success))complate;

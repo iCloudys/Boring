@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		04240A2B201F099200448B1F /* KSCollectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04240A2A201F099200448B1F /* KSCollectCell.m */; };
 		0429F48E201195DD007C17F5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0429F48D201195DD007C17F5 /* AppDelegate.m */; };
 		0429F496201195DD007C17F5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0429F495201195DD007C17F5 /* Assets.xcassets */; };
 		0429F499201195DD007C17F5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0429F497201195DD007C17F5 /* LaunchScreen.storyboard */; };
@@ -37,6 +38,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		04240A29201F099200448B1F /* KSCollectCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KSCollectCell.h; sourceTree = "<group>"; };
+		04240A2A201F099200448B1F /* KSCollectCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KSCollectCell.m; sourceTree = "<group>"; };
 		0429F489201195DD007C17F5 /* Boring.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Boring.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0429F48C201195DD007C17F5 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		0429F48D201195DD007C17F5 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -289,6 +292,8 @@
 				042D0C3720184293004474FA /* KSMineHeaderCell.m */,
 				042D0C39201895DA004474FA /* KSMineItemCell.h */,
 				042D0C3A201895DA004474FA /* KSMineItemCell.m */,
+				04240A29201F099200448B1F /* KSCollectCell.h */,
+				04240A2A201F099200448B1F /* KSCollectCell.m */,
 			);
 			path = V;
 			sourceTree = "<group>";
@@ -482,6 +487,7 @@
 				04DA9243201ADEF4009DD462 /* KSFeedBackController.m in Sources */,
 				042D0C2A201716E7004474FA /* KSTableLongCell.m in Sources */,
 				0429F48E201195DD007C17F5 /* AppDelegate.m in Sources */,
+				04240A2B201F099200448B1F /* KSCollectCell.m in Sources */,
 				042D0C2F20172F1D004474FA /* KSDetailController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -7,8 +7,18 @@
 //
 
 #import "KSCollectController.h"
+#import "KSUser.h"
+#import "KSText.h"
+#import "KSCollectCell.h"
 
-@interface KSCollectController ()
+@interface KSCollectController ()<
+UITableViewDelegate,
+UITableViewDataSource,
+UITableViewDataSourcePrefetching>
+
+@property (nonatomic, strong) UITableView* tableView;
+
+@property (nonatomic, strong) NSArray<KSText*>* dataSource;
 
 @end
 
@@ -16,22 +26,74 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+
+    [self.view addSubview:self.tableView];
+
+    [self loadData];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)loadData{
+    if (!self.dataSource) { self.dataSource = [NSMutableArray array]; }
+    
+    Weak(self);
+    [Api fetchCollectUser:[KSUser shared].cuid
+                 complate:^(BOOL success, NSArray<KSText *> *texts) {
+                     weak_self.dataSource = texts;
+                     [weak_self.tableView reloadData];
+    }];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)viewDidLayoutSubviews{
+    [super viewDidLayoutSubviews];
+    self.tableView.frame = self.view.bounds;
 }
-*/
 
+///MARK: -UITableViewDataSource
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return self.dataSource.count;
+}
+
+- (void)tableView:(UITableView *)tableView prefetchRowsAtIndexPaths:(NSArray<NSIndexPath *> *)indexPaths{
+    //    NSLog(@"%@",indexPaths);
+}
+
+- (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    KSText* text = self.dataSource[indexPath.row];
+    
+    KSCollectCell* cell = [tableView dequeueReusableCellWithIdentifier:KSCollectCellID forIndexPath:indexPath];
+    
+    cell.text = text;
+    
+    return cell;
+    
+}
+
+- (UITableView *)tableView{
+    if (!_tableView) {
+        _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
+        _tableView.delegate = self;
+        _tableView.dataSource = self;
+        
+        if (@available(iOS 10,*)) {
+            _tableView.prefetchDataSource = self;
+        }
+        
+        _tableView.separatorInset = UIEdgeInsetsZero;
+        _tableView.layoutMargins = UIEdgeInsetsZero;
+        
+        _tableView.separatorColor = SeparatorColor;
+        
+        _tableView.tableFooterView = [UIView new];
+        
+        _tableView.estimatedRowHeight = 1000;
+        _tableView.rowHeight = UITableViewAutomaticDimension;
+
+        _tableView.estimatedSectionFooterHeight = 0;
+        _tableView.estimatedSectionHeaderHeight = 0;
+        
+        [_tableView registerClass:[KSCollectCell class]
+           forCellReuseIdentifier:KSCollectCellID];
+    }
+    return _tableView;
+}
 @end

@@ -228,6 +228,68 @@ static Api* _api;
        }];
 }
 
++ (void)fetchCollectUser:(NSString*)userId
+                complate:(void(^)(BOOL success,NSArray<KSText*>* texts))complate{
+    NSString* urlString = [NSString stringWithFormat:@"https://www.wuliaokankan.cn/user/collect/%@.html",userId];
+    
+    AFHTTPSessionManager* manager = [AFHTTPSessionManager manager];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
+    
+    [manager POST:urlString
+       parameters:nil
+         progress:NULL
+          success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+              
+              NSMutableArray* texts = [NSMutableArray array];
+
+              NSHTTPURLResponse* response = (NSHTTPURLResponse*)task.response;
+              
+              BOOL status = response.statusCode == 200;
+
+              if (status) {
+                  NSString* htmlString = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+                  
+                  NSString* pattern = @"(?<=<a class=\"link title clip\" href=\"/short_detail/)[\\s\\S]+?(?=</a>)";
+                  
+                  NSError* error = nil;
+                  
+                  NSRegularExpression* regularExpression = [NSRegularExpression regularExpressionWithPattern:pattern
+                                                                                                     options:1
+                                                                                                       error:&error];
+                  
+                  if (error) {
+                      complate ? complate(status, texts) : nil;
+                  }
+                  
+                  NSArray<NSTextCheckingResult*>* checkResults = [regularExpression matchesInString:htmlString
+                                                                                            options:NSMatchingReportCompletion
+                                                                                              range:NSMakeRange(0, htmlString.length)];
+                  
+                  
+                  NSString* rangeString = @".html\">";
+                  for (NSTextCheckingResult* checkResult in checkResults) {
+                      NSString* subString = [htmlString substringWithRange:checkResult.range];
+                      
+                      KSText* text = [[KSText alloc] init];
+                      NSRange range = [subString rangeOfString:rangeString];
+                      
+                      text.content = [subString substringFromIndex:NSMaxRange(range)];
+                      text.id = [subString substringToIndex:range.location];
+                      text.resType = KSTextResShortType;
+                      
+                      [texts addObject:text];
+                  }
+              }
+              
+              complate ? complate(status, texts) : nil;
+              
+          } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+              complate ? complate(NO, @[]) : nil;
+          }
+     ];
+}
+
 + (void)submitFeedbackEmail:(NSString*)email
                     content:(NSString*)content
                    complate:(void(^)(BOOL success))complate{

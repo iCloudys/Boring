@@ -56,11 +56,11 @@
         self.unLikebtn = [self factoryButton:@"unlike"
                                       action:@selector(unLikeButtonAction:)
                                       border:YES];
-        
+        /*
         self.commentBtn = [self factoryButton:@"comment"
                                        action:@selector(commentButtonAction:)
                                        border:NO];
-        
+        */
         self.starBtn = [self factoryButton:@"star"
                                     action:@selector(starButtonAction:)
                                     border:NO];
