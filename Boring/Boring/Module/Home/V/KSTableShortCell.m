@@ -251,12 +251,18 @@
 }
 
 + (CGFloat)heightForText:(KSText *)text withWidth:(CGFloat)width{
-    KSTableShortCell* cell = [[KSTableShortCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@""];
-    cell.frame = CGRectMake(0, 0, width, 0);
-    cell.text = text;
-    [cell setNeedsLayout];
-    [cell layoutIfNeeded];
-    return CGRectGetMaxY(cell.likeBtn.frame) + LayoutMargins.bottom;
+    
+    if (text.height == CGFLOAT_MIN) {
+        KSTableShortCell* cell = [[KSTableShortCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@""];
+        cell.frame = CGRectMake(0, 0, width, 0);
+        cell.text = text;
+        [cell setNeedsLayout];
+        [cell layoutIfNeeded];
+        text.height = CGRectGetMaxY(cell.likeBtn.frame) + LayoutMargins.bottom;
+    }
+    
+    return text.height;
+    
 }
 
 @end

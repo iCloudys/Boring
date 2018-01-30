@@ -13,12 +13,11 @@
 
 @interface KSCollectController ()<
 UITableViewDelegate,
-UITableViewDataSource,
-UITableViewDataSourcePrefetching>
+UITableViewDataSource>
 
 @property (nonatomic, strong) UITableView* tableView;
 
-@property (nonatomic, strong) NSArray<KSText*>* dataSource;
+@property (nonatomic, strong) NSMutableArray<KSText*>* dataSource;
 
 @end
 
@@ -38,7 +37,7 @@ UITableViewDataSourcePrefetching>
     Weak(self);
     [Api fetchCollectUser:[KSUser shared].cuid
                  complate:^(BOOL success, NSArray<KSText *> *texts) {
-                     weak_self.dataSource = texts;
+                     weak_self.dataSource = texts.mutableCopy;
                      [weak_self.tableView reloadData];
     }];
 }
@@ -53,8 +52,36 @@ UITableViewDataSourcePrefetching>
     return self.dataSource.count;
 }
 
-- (void)tableView:(UITableView *)tableView prefetchRowsAtIndexPaths:(NSArray<NSIndexPath *> *)indexPaths{
-    //    NSLog(@"%@",indexPaths);
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath{
+    return YES;
+}
+
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return UITableViewCellEditingStyleDelete;
+}
+
+- (NSString*)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return @"删除";
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
+    Weak(self);
+    UIAlertController* al = [UIAlertController alertControllerWithTitle:nil
+                                                                message:@"是否取消收藏?"
+                                                         preferredStyle:UIAlertControllerStyleAlert];
+    [al addAction:[UIAlertAction actionWithTitle:@"是"
+                                           style:UIAlertActionStyleDefault
+                                         handler:^(UIAlertAction * _Nonnull action) {
+                                             [Api unCollectText:weak_self.dataSource[indexPath.row] complate:NULL];
+                                             [weak_self.dataSource removeObjectAtIndex:indexPath.row];
+                                             [weak_self.tableView deleteRowsAtIndexPaths:@[indexPath]
+                                                                        withRowAnimation:UITableViewRowAnimationAutomatic];
+    }]];
+    [al addAction:[UIAlertAction actionWithTitle:@"否"
+                                           style:UIAlertActionStyleCancel
+                                         handler:NULL]];
+    [self presentViewController:al animated:YES completion:NULL];
+    
 }
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -85,7 +112,7 @@ UITableViewDataSourcePrefetching>
         
         _tableView.tableFooterView = [UIView new];
         
-        _tableView.estimatedRowHeight = 1000;
+        _tableView.estimatedRowHeight = 200;
         _tableView.rowHeight = UITableViewAutomaticDimension;
 
         _tableView.estimatedSectionFooterHeight = 0;

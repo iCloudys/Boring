@@ -228,6 +228,20 @@ static Api* _api;
        }];
 }
 
++ (void)unCollectText:(KSText *)text
+             complate:(void(^)(BOOL success))complate{
+    
+    NSString* url = [NSString stringWithFormat:@"https://www.wuliaokankan.cn/user_collection/%@/1?resType=0",text.id];
+    
+    [self POST:url
+     parameter:@{}
+       success:^(NSURLSessionDataTask *task, id responseObject) {
+           complate ? complate(YES) : nil;
+       } failure:^(NSURLSessionDataTask *task, NSError *error) {
+           complate ? complate(NO) : nil;
+       }];
+}
+
 + (void)fetchCollectUser:(NSString*)userId
                 complate:(void(^)(BOOL success,NSArray<KSText*>* texts))complate{
     NSString* urlString = [NSString stringWithFormat:@"https://www.wuliaokankan.cn/user/collect/%@.html",userId];

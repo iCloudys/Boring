@@ -15,12 +15,18 @@ PODS:
   - AFNetworking/UIKit (3.1.0):
     - AFNetworking/NSURLSession
   - MJExtension (3.0.13)
-  - MJRefresh (3.1.15.1)
+  - MJRefresh (3.1.15.3)
   - SDWebImage (4.2.3):
     - SDWebImage/Core (= 4.2.3)
   - SDWebImage/Core (4.2.3)
   - Toast (4.0.0)
   - UIColor-HexRGB (1.0.1)
+  - UMCAnalytics (5.4.1):
+    - UMCCommon
+  - UMCCommon (1.4.1)
+  - UMCErrorCatch (1.0.0):
+    - UMCCommon
+  - UMCSecurityPlugins (1.0.6)
   - WMPageController (2.5.2)
 
 DEPENDENCIES:
@@ -30,17 +36,25 @@ DEPENDENCIES:
   - SDWebImage
   - Toast
   - UIColor-HexRGB
+  - UMCAnalytics
+  - UMCCommon
+  - UMCErrorCatch
+  - UMCSecurityPlugins
   - WMPageController
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
   MJExtension: 5932755f451458eefa24239358817f8d291240c7
-  MJRefresh: 5f8552bc25ca8751c010f621c1098dbdaacbccd6
+  MJRefresh: b48380ae2b927b46c4ef000de9adb8dc748e1df7
   SDWebImage: 791bb72962b3492327ddcac4b1880bd1b5458431
   Toast: 91b396c56ee72a5790816f40d3a94dd357abc196
   UIColor-HexRGB: daccfa7e936af664369734a164b0309087d7f970
+  UMCAnalytics: 44e0bb2f442b7aaf97d1c924b58798b612f2c13d
+  UMCCommon: ed0b882a939c45850f6803a5837698572a3e9b96
+  UMCErrorCatch: 51f1b68f920233e90a3fa6d51f0456174507ec78
+  UMCSecurityPlugins: 0831a08f3988f3cea9f1d3a7626cd9bee4fef150
   WMPageController: 0c7624d2b48e4f1ab92371688cf6744ed701575d
 
-PODFILE CHECKSUM: 76aa46ca3aebd8456723354d3b60b203bd98ca15
+PODFILE CHECKSUM: 215b546229d226af58bee4b7a27759101cbae601
 
 COCOAPODS: 1.3.1

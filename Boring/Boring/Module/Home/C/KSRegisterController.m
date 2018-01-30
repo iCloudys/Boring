@@ -157,7 +157,7 @@
     {
         self.registerButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [self.registerButton setTitle:@"注 册" forState:UIControlStateNormal];
-        self.registerButton.titleLabel.font = [UIFont systemFontOfSize:14];
+        self.registerButton.titleLabel.font = [UIFont systemFontOfSize:17];
         self.registerButton.backgroundColor = ThemeColor;
         [self.registerButton addTarget:self action:@selector(loginAction:) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:self.registerButton];

@@ -624,7 +624,10 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.lingshuo.test;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
-				WARNING_CFLAGS = "-Wno-strict-prototypes";
+				WARNING_CFLAGS = (
+					"-Wno-strict-prototypes",
+					"-Wno-documentation",
+				);
 			};
 			name = Debug;
 		};
@@ -642,7 +645,10 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.lingshuo.test;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
-				WARNING_CFLAGS = "-Wno-strict-prototypes";
+				WARNING_CFLAGS = (
+					"-Wno-strict-prototypes",
+					"-Wno-documentation",
+				);
 			};
 			name = Release;
 		};

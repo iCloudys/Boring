@@ -10,6 +10,15 @@
 
 @implementation KSText
 
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        self.height = CGFLOAT_MIN;
+    }
+    return self;
+}
+
 //此处需要优化内存
 - (void)setContent:(NSString *)content{
     _content = [content copy];

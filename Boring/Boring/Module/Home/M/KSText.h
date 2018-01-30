@@ -18,9 +18,13 @@
 @property (nonatomic, copy) NSString* htmlDescription;
 @property (nonatomic, copy) NSString* resId;
 @property (nonatomic, copy) NSString* userId;
+@property (nonatomic, copy) NSString* pageview;
 
 @property (nonatomic, copy) NSString* content;
 @property (nonatomic, copy, readonly) NSAttributedString* attributeContent;
+
+@property (nonatomic, copy) NSString* title;
+@property (nonatomic, copy, readonly) NSAttributedString* attributeTitle;
 
 @property (nonatomic, copy) NSString* down;
 @property (nonatomic, copy) NSString* resName;
@@ -29,17 +33,13 @@
 @property (nonatomic, copy) NSString* share;
 @property (nonatomic, copy) NSString* id;
 @property (nonatomic, copy) NSString* tag;
-@property (nonatomic, copy) NSString* pageview;
 @property (nonatomic, copy) NSString* collect;
 @property (nonatomic, copy) NSString* kingComment;
 @property (nonatomic, copy) NSString* cp_sum;
-
 @property (nonatomic, copy) NSString* picture;
-
-@property (nonatomic, copy) NSString* title;
-@property (nonatomic, copy, readonly) NSAttributedString* attributeTitle;
-
 @property (nonatomic, copy) NSString* createTime;
+
+@property (nonatomic, assign) CGFloat height;
 
 @property (nonatomic, assign) KSTextResType resType;
 

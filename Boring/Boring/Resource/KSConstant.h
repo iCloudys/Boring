@@ -9,6 +9,8 @@
 #ifndef KSConstant_h
 #define KSConstant_h
 
+#define UMengKey @"5a6fdcf6f43e4830ba0000c0"
+
 #define Weak(obj) __weak typeof(obj) weak_##obj = obj
 
 #define SeparatorColor [UIColor colorWithHex:@"C8C7CC"]

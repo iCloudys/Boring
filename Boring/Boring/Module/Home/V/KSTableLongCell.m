@@ -82,11 +82,14 @@
 }
 
 + (CGFloat)heightForText:(KSText*)text withWidth:(CGFloat)width{
-    if (text.picture.length == 0) {
-        return 60;
-    }else{
-        return 90;
+    if (text.height == CGFLOAT_MIN) {
+        if (text.picture.length == 0) {
+            text.height = 60;
+        }else{
+            text.height = 90;
+        }
     }
+    return text.height;
 }
 
 @end

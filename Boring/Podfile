@@ -15,4 +15,10 @@ target 'Boring' do
     pod 'MJExtension'
     pod 'Toast'
     
+    pod 'UMCCommon'
+    pod 'UMCSecurityPlugins'
+    pod 'UMCAnalytics'
+#    pod 'UMCPush'
+    pod 'UMCErrorCatch'
+    
 end

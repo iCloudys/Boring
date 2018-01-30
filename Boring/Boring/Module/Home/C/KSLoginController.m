@@ -201,7 +201,7 @@
     {
         self.loginButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [self.loginButton setTitle:@"登 录" forState:UIControlStateNormal];
-        self.loginButton.titleLabel.font = [UIFont systemFontOfSize:14];
+        self.loginButton.titleLabel.font = [UIFont systemFontOfSize:17];
         self.loginButton.backgroundColor = ThemeColor;
         [self.loginButton addTarget:self action:@selector(loginAction:) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:self.loginButton];

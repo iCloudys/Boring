@@ -10,6 +10,10 @@
 #import "KSHomeController.h"
 #import "KSNavigationController.h"
 
+#import <UMCommon/UMCommon.h>
+#import <UMErrorCatch/UMErrorCatch.h>
+#import <UMAnalytics/MobClick.h>
+
 @interface AppDelegate ()
 
 @end
@@ -23,6 +27,10 @@
     self.window.frame = [UIScreen mainScreen].bounds;
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
+
+    [UMConfigure initWithAppkey:UMengKey channel:nil];
+    [MobClick setScenarioType:E_UM_NORMAL];
+    [UMErrorCatch initErrorCatch];
     
     KSHomeController* home = [[KSHomeController alloc] init];
     self.window.rootViewController = [[KSNavigationController alloc] initWithRootViewController:home];
