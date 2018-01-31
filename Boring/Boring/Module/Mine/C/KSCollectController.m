@@ -100,11 +100,7 @@ UITableViewDataSource>
         _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
         _tableView.delegate = self;
         _tableView.dataSource = self;
-        
-        if (@available(iOS 10,*)) {
-            _tableView.prefetchDataSource = self;
-        }
-        
+
         _tableView.separatorInset = UIEdgeInsetsZero;
         _tableView.layoutMargins = UIEdgeInsetsZero;
         

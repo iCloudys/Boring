@@ -60,7 +60,9 @@ WMPageControllerDataSource
     [self.headerView setImage:[UIImage imageNamed:@"demo"] forState:UIControlStateNormal];
     self.headerView.layer.masksToBounds = YES;
     [self.headerView addTarget:self action:@selector(leftButtonAction:) forControlEvents:UIControlEventTouchUpInside];
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.headerView];
+    UIView* leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
+    [leftView addSubview:self.headerView];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:leftView];
     /*
     UIImageView* search = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"search"]];
     search.frame = CGRectMake(0, 0, 25, 25);

@@ -619,9 +619,9 @@
 				DEVELOPMENT_TEAM = GB56S2965F;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/Boring/Resource/Boring.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/Boring/Resource/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.lingshuo.test;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lingshuo.wuliaokankan;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WARNING_CFLAGS = (
@@ -640,9 +640,9 @@
 				DEVELOPMENT_TEAM = GB56S2965F;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/Boring/Resource/Boring.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/Boring/Resource/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.lingshuo.test;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lingshuo.wuliaokankan;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WARNING_CFLAGS = (

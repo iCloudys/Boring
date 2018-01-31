@@ -158,7 +158,6 @@ static Api* _api;
        } failure:^(NSURLSessionDataTask *task, NSError *error) {
            complate(@[]);
        }];
-    
 }
 
 + (void)getTextDetail:(KSText *)text
@@ -168,11 +167,11 @@ static Api* _api;
     if (text.resType == KSTextResLongType) {
         url = [NSString stringWithFormat:@"https://www.wuliaokankan.cn/long_detail/%@.html",text.id];
     }
-    
     AFHTTPSessionManager* manager = [AFHTTPSessionManager manager];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
-    [manager POST:url
+    
+    [manager GET:url
        parameters:nil
          progress:NULL
           success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
@@ -343,31 +342,29 @@ static Api* _api;
 //    CNZZDATA1262018712=586299301-1516329225-%7C1516617021"
     
     Weak(self);
-    [[Api api].manager POST:post
-                 parameters:parameter
-                   progress:NULL
-                    success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-                        
-                        NSInteger code = [responseObject[@"code"] integerValue];
-                        if (code == 0) {
-                            
-                            success? success(task,responseObject) : nil;
-                            
-                        }else{
-                            NSString* msg = responseObject[@"msg"];
-                            [weak_self showMsg:msg];
-                            failure ? failure(task,nil) : nil;
-                        }
-                        
-                    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+    [[Api api].manager GET:post
+                parameters:parameter
+                  progress:NULL
+                   success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+                       NSInteger code = [responseObject[@"code"] integerValue];
+                       if (code == 0) {
+                           
+                           success? success(task,responseObject) : nil;
+                           
+                       }else{
+                           NSString* msg = responseObject[@"msg"];
+                           [weak_self showMsg:msg];
+                           failure ? failure(task,nil) : nil;
+                       }
+                   } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
 #if DEBUG
-                        NSHTTPURLResponse* resp = (NSHTTPURLResponse*)task.response;
-                        [weak_self showMsg:[NSString stringWithFormat:@"error:%ld",resp.statusCode]];
+                       NSHTTPURLResponse* resp = (NSHTTPURLResponse*)task.response;
+                       [weak_self showMsg:[NSString stringWithFormat:@"error:%ld",resp.statusCode]];
 #else
-                        [weak_self showMsg:@"网络错误"];
+                       [weak_self showMsg:@"网络错误"];
 #endif
-                        failure ? failure(task,nil) : nil;
-                    }];
+                       failure ? failure(task,error) : nil;
+                   }];
 }
 
 + (void)showMsg:(NSString*)msg{
